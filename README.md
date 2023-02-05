@@ -1,4 +1,4 @@
-# Kubeflow: AWS EKS Deploy from OSX
+# Kubeflow: Create EKS Clusters and Deploy Kubeflow from OSX
 
 Single command to deploy [Kubeflow](https://awslabs.github.io/kubeflow-manifests/release-v1.6.1-aws-b1.0.0/) to EKS on AWS from OSX
 
