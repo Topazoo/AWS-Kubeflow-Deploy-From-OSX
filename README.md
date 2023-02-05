@@ -26,6 +26,14 @@ export CLUSTER_NAME=kubeflow
 ./deploy-kubeflow.sh
 ```
 
+Once the deployment is complete, the following command will run to bind the cluster locally from the container:
+
+```
+make port-forward IP_ADDRESS=0.0.0.0
+```
+
+and you can access Kubeflow at http://localhost:8080/
+
 ## Additional Configuration
 
 The following additional arguments can be specified via environmental variables:
