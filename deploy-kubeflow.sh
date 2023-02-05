@@ -103,4 +103,6 @@ echo \"Cluster created!\"
 echo \"Deploying Kubeflow...\"
 make deploy-kubeflow INSTALLATION_OPTION=kustomize DEPLOYMENT_OPTION=vanilla
 echo \"Kubeflow deployed!\"
+echo \"Forwarding port...\"
+make port-forward IP_ADDRESS=0.0.0.0
 ' > /script && chmod +x /script && /script"
