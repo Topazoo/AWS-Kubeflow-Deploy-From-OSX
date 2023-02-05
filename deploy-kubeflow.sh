@@ -6,7 +6,7 @@ fi
 
 if [ -z "${CLUSTER_REGION}" ]; then
     echo "CLUSTER_REGION is unset. Using default [us-west-2]"
-    AWS_DEFAULT_REGION="us-west-2"
+    CLUSTER_REGION="us-west-2"
 fi
 
 if [ -z "${NODEGROUP_NAME}" ]; then
