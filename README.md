@@ -26,7 +26,7 @@ export CLUSTER_NAME=kubeflow
 ./deploy-kubeflow.sh
 ```
 
-## Additional Config
+## Additional Configuration
 
 The following additional arguments can be specified via environmental variables:
 
@@ -74,3 +74,58 @@ export KUBEFLOW_RELEASE_VERSION="v1.6.1"
 # The AWS Kubeflow version to deploy to the cluster
 export AWS_RELEASE_VERSION="v1.6.1-aws-b1.0.0"
 ```
+
+## IAM Configuration
+
+The AWS ACCESS and SECRET keys must belong to an IAM user with sufficient permissions to create an EKS cluster and deploy Kubeflow. This is the configuration that worked for me:
+
+- AmazonEC2FullAccess
+- AmazonEKSClusterPolicy
+- AmazonEKSWorkerNodePolicy
+- AmazonS3FullAccess
+- AmazonVPCFullAccess
+- AWSCloudFormationFullAccess
+- IAMFullAccess
+- IAMUserChangePassword
+- EKS-Automation
+
+_EKS-Automation_ is a custom policy:
+
+```json
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": [
+                "eks:CreateCluster",
+                "eks:DescribeCluster",
+                "eks:UpdateClusterConfig",
+                "eks:DeleteCluster",
+                "eks:ListClusters",
+                "eks:DescribeUpdate",
+                "eks:CreateFargateProfile",
+                "eks:DeleteFargateProfile",
+                "eks:DescribeFargateProfile",
+                "eks:ListFargateProfiles",
+                "eks:CreateAddon",
+                "eks:DescribeAddon",
+                "eks:DeleteAddon",
+                "eks:DescribeAddonVersions",
+                "eks:CreateNodegroup",
+                "eks:UpdateNodegroupConfig",
+                "eks:DeleteNodegroup",
+                "eks:DescribeNodegroup",
+                "eks:ListNodegroups",
+                "eks:UpdateNodegroupVersion",
+                "eks:TagResource",
+                "eks:UntagResource",
+                "eks:ListTagsForResource"
+            ],
+            "Resource": "*"
+        }
+    ]
+}
+```
+
+This probably doesn't do a great job of followinng "least-privilidge", but it will get your stack up and running :)
